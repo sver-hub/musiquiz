@@ -1,0 +1,16 @@
+name: musiquiz_server_dart
+description: An new Dart Frog application
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.19.0 <3.0.0"
+
+dependencies:
+  dart_frog: ^0.3.0
+  dio: ^5.0.1
+  models:
+    path: ../models
+
+dev_dependencies:
+  very_good_analysis: ^4.0.0
