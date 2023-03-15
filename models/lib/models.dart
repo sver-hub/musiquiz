@@ -1,3 +1,4 @@
 library models;
 
-export 'src/spotify_token_response.dart';
+export 'src/track.dart';
+export 'src/saved_tracks_response.dart';
