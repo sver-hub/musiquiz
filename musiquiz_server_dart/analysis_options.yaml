@@ -8,3 +8,6 @@ linter:
     file_names: false
     public_member_api_docs: false
     sort_constructors_first: false
+    always_use_package_imports: false
+    one_member_abstracts: false
+    flutter_style_todos: false

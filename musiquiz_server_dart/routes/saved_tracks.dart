@@ -1,41 +1,39 @@
-import 'dart:convert';
-
 import 'package:dart_frog/dart_frog.dart';
 import 'package:dio/dio.dart' hide Response;
 import 'package:models/models.dart';
 import 'package:models/server_models.dart';
+import 'package:musiquiz_server_dart/src/parsers/header_parser.dart';
 import 'package:musiquiz_server_dart/src/util/dio_x.dart';
 
 Future<Response> onRequest(RequestContext context) async {
   final request = context.request;
-  // TODO match Bearer
-  final accessToken = request.headers[_Constants.authorization]?.split(' ')[1];
+  final accessToken = HeaderParser.parseAuthorizationBearer(request.headers);
   if (accessToken == null) {
     return Response(statusCode: 400, body: 'Missing spotify access token');
   }
-  final limit =
-      int.tryParse(request.uri.queryParameters[_Constants.limitQuery] ?? '') ??
-          _Constants.defaultLimit;
+
+  final dio = Dio(
+    BaseOptions(
+      headers: {
+        ...HeaderParser.createAuthorizationBearer(accessToken),
+        ...HeaderParser.createContentTypeJson(),
+      },
+    ),
+  );
 
   final items = <Track>[];
-  var tracksLeft = limit;
+  String? nextPagePath;
   do {
-    final dio = Dio(
-      BaseOptions(
-        baseUrl: _Constants.baseUrl,
-        headers: {
-          _Constants.authorization: 'Bearer $accessToken',
-          ..._Constants.contentTypeHeader,
-        },
-      ),
+    final spotifyResponse = await dio.getJson(
+      nextPagePath ?? '${_Constants.baseUrl}${_Constants.path}',
+      queryParameters: {_Constants.limitQuery: _Constants.maxLimit},
     );
-    final spotifyResponse = await dio.getJson(_Constants.path);
     if (spotifyResponse.statusCode == 200) {
       final data = SpotifySavedTracksResponse.fromJson(spotifyResponse.data!);
+      nextPagePath = data.next;
       items.addAll(data.tracks);
     }
-    tracksLeft = 0;
-  } while (tracksLeft > 0);
+  } while (nextPagePath != null);
 
   final response = SavedTracksResponse(items).toJson();
 
@@ -50,12 +48,9 @@ Future<Response> onRequest(RequestContext context) async {
 }
 
 abstract class _Constants {
-  static const authorization = 'Authorization';
   static const limitQuery = 'limit';
 
-  static const contentTypeHeader = {'Content-Type': 'application/json'};
   static const baseUrl = 'https://api.spotify.com';
   static const path = '/v1/me/tracks';
-  static const defaultLimit = 20;
   static const maxLimit = 50;
 }

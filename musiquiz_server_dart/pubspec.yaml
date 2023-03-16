@@ -7,8 +7,10 @@ environment:
   sdk: ">=2.19.0 <3.0.0"
 
 dependencies:
+  collection: ^1.17.1
   dart_frog: ^0.3.0
   dio: ^5.0.1
+  dio_smart_retry: ^5.0.0
   models:
     path: ../models
 
