@@ -1,9 +1,7 @@
 import 'package:dart_frog/dart_frog.dart';
-import 'package:musiquiz_server_dart/src/musixmatch/musixmatch_api.dart';
 import 'package:musiquiz_server_dart/src/parsers/header_parser.dart';
 import 'package:musiquiz_server_dart/src/quizes/guess_by_lyrics_quiz.dart';
-import 'package:musiquiz_server_dart/src/service/tracks_service.dart';
-import 'package:musiquiz_server_dart/src/spotify/spotify_api.dart';
+import 'package:musiquiz_server_dart/src/service/music_data_service.dart';
 
 Future<Response> onRequest(RequestContext context) async {
   final accessToken =
@@ -12,10 +10,8 @@ Future<Response> onRequest(RequestContext context) async {
     return Response(statusCode: 400, body: 'Missing spotify access token');
   }
 
-  final spotifyApi = SpotifyApi(accessToken);
-  final musixmatchApi = MusixmatchApi();
-  final tracksService = TracksService(spotifyApi, musixmatchApi);
-  final quizCreator = GuessByLyricsQuiz(tracksService);
+  final musicDataService = MusicDataService.create(accessToken);
+  final quizCreator = GuessByLyricsQuiz(musicDataService);
   final quiz = await quizCreator.createQuiz(6);
 
   return Response.json(body: quiz.toJson());

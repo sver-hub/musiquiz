@@ -1,6 +1,6 @@
 typedef Headers = Map<String, String>;
 
-class HeaderParser {
+abstract class HeaderParser {
   static const _authorization = 'Authorization';
   static const _bearer = 'Bearer';
   static const _contentType = 'Content-Type';

@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'track.dart';
+import 'music_data/track.dart';
 
 part 'saved_tracks_response.g.dart';
 

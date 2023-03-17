@@ -1,24 +1,26 @@
 import 'package:models/models.dart';
-import 'package:musiquiz_server_dart/src/models/tracks_with_lyrics.dart';
-import 'package:musiquiz_server_dart/src/service/tracks_service.dart';
+import 'package:musiquiz_server_dart/src/service/music_data_service.dart';
 
 class GuessByLyricsQuiz {
-  final TracksService _tracksService;
+  final MusicDataService _musicDataService;
 
-  GuessByLyricsQuiz(this._tracksService);
+  GuessByLyricsQuiz(this._musicDataService);
 
   Future<GuessByLyricsQuizResponse> createQuiz(int numberOfQuestions) async {
-    final tracks = await _tracksService.getRandomTracks(numberOfQuestions);
+    final tracks = await _musicDataService.getRandomTracks(
+      numberOfTracks: numberOfQuestions,
+      withLyrics: true,
+    );
     final items = tracks.map(_createQuizItem).toList();
     return GuessByLyricsQuizResponse(items);
   }
 }
 
-GuessByLyricsQuizItem _createQuizItem(TrackWithLyrics track) {
+GuessByLyricsQuizItem _createQuizItem(Track track) {
   return GuessByLyricsQuizItem(
     lyrics: track.lyrics!,
-    trackName: track.track.name,
-    albumName: track.track.album.name,
-    artistNames: track.track.artists.map((e) => e.name).toList(),
+    trackName: track.name,
+    albumName: track.album.name,
+    artistNames: track.artists.map((e) => e.name).toList(),
   );
 }

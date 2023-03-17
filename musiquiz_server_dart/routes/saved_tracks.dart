@@ -4,6 +4,7 @@ import 'package:models/models.dart';
 import 'package:models/server_models.dart';
 import 'package:musiquiz_server_dart/src/parsers/header_parser.dart';
 import 'package:musiquiz_server_dart/src/util/dio_x.dart';
+import 'package:musiquiz_server_dart/src/util/spotify_model_converter.dart';
 
 Future<Response> onRequest(RequestContext context) async {
   final request = context.request;
@@ -31,7 +32,7 @@ Future<Response> onRequest(RequestContext context) async {
     if (spotifyResponse.statusCode == 200) {
       final data = SpotifySavedTracksResponse.fromJson(spotifyResponse.data!);
       nextPagePath = data.next;
-      items.addAll(data.tracks);
+      items.addAll(data.tracks.map((e) => e.asTrack));
     }
   } while (nextPagePath != null);
 
