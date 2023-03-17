@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../track.dart';
+import '../shared/track.dart';
 
 part 'spotify_saved_tracks_response.g.dart';
 
