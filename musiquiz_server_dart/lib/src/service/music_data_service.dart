@@ -34,18 +34,32 @@ class MusicDataService {
     return result;
   }
 
-  Future<SpotifyTrack> _getSavedTrackByOffset(int offset) async {
-    final response = await _spotifyApi.getSavedTracks(limit: 1, offset: offset);
-    return response.first;
+  Map<int, int> _createOffsetLimitMap(Iterable<int> offsets) {
+    final sorted = offsets.toList()..sort();
+    final result = <int, int>{};
+
+    var limit = 0;
+    for (var i = 0; i < sorted.length; i++) {
+      final offset = sorted[i];
+      if (result.containsKey(offset - limit)) {
+        result[offset - limit] = ++limit;
+        continue;
+      }
+      limit = 0;
+      result[offset] = ++limit;
+    }
+    return result;
   }
 
   Future<List<SpotifyTrack>> _getRandomSavedTracks(int numberOfTracks) async {
     final randomOffsets = await _generateRandomOffsets(numberOfTracks);
 
-    // TODO optimize request for subsuqent offsets
+    final offsetLimitMap = _createOffsetLimitMap(randomOffsets);
     final result = <SpotifyTrack>[];
-    for (final offset in randomOffsets) {
-      result.add(await _getSavedTrackByOffset(offset));
+    for (final entry in offsetLimitMap.entries) {
+      result.addAll(
+        await _spotifyApi.getSavedTracks(offset: entry.key, limit: entry.value),
+      );
     }
     return result;
   }

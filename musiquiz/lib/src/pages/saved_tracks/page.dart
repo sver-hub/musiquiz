@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:models/models.dart';
@@ -39,11 +38,6 @@ class TrackWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: CachedNetworkImage(
-        imageUrl: track.album.images.last.url,
-        width: 50,
-        height: 50,
-      ),
       title: Text(track.name),
       subtitle: Text(track.artists.map((e) => e.name).join(', ')),
     );

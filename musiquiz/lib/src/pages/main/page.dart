@@ -22,10 +22,25 @@ class MainPage extends ConsumerWidget {
               ),
             )
           : Center(
-              child: ElevatedButton(
-                child: const Text('Get tracks'),
-                onPressed: () =>
-                    Navigator.of(context).pushNamed('saved_tracks'),
+              child: SizedBox(
+                width: 300,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    ElevatedButton(
+                      child: const Text('Get tracks'),
+                      onPressed: () =>
+                          Navigator.of(context).pushNamed('saved_tracks'),
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      child: const Text('Guess by lyrics quiz'),
+                      onPressed: () =>
+                          Navigator.of(context).pushNamed('lyrics_quiz'),
+                    ),
+                  ],
+                ),
               ),
             ),
     );

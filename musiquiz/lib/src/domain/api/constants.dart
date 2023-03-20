@@ -4,6 +4,7 @@ abstract class BaseUrl {
 
 abstract class Path {
   static const savedTracks = '/saved_tracks';
+  static const guessByLyrics = '/guess_by_lyrics_quiz';
 }
 
 abstract class Query {
