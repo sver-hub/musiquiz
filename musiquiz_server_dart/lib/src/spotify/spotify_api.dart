@@ -56,7 +56,7 @@ class SpotifyApi {
     return _totalSavedTracks = data.total;
   }
 
-  Future<List<SpotifyTrack>> getSavedTracks({
+  Future<List<SpotifyTrackResponse>> getSavedTracks({
     required int limit,
     required int offset,
   }) async {
@@ -124,5 +124,20 @@ class SpotifyApi {
     }
 
     return result;
+  }
+
+  Future<SpotifySearchResponse> search({
+    required String searchTerm,
+    required String type,
+  }) async {
+    final response = await _dio.getJson(
+      SpotifyApiConstants.searchPath,
+      queryParameters: {
+        SpotifyApiConstants.querySearchTerm: searchTerm,
+        SpotifyApiConstants.querySearchType: type,
+        SpotifyApiConstants.queryMarket: SpotifyApiConstants.queryValueMarket,
+      },
+    );
+    return SpotifySearchResponse.fromJson(response.data!);
   }
 }

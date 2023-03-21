@@ -1,7 +1,7 @@
 import 'package:models/models.dart';
 import 'package:models/server_models.dart';
 
-extension SpotifyTrackX on SpotifyTrack {
+extension SpotifyTrackX on SpotifyTrackResponse {
   Track get asTrack => Track(
         id: id,
         name: name,
@@ -33,4 +33,10 @@ extension SpotifyAlbumsArtistX on SpotifyAlbumsArtist {
 
 extension SpotifyArtistsAlbumX on SpotifyArtistsAlbum {
   SimpleAlbum get asSimpleAlbum => SimpleAlbum(id: id, name: name);
+}
+
+extension SpotifyArtistX on SpotifyArtistResponse {
+  Artist get asArtist => Artist(id: id, name: name, images: images);
+
+  SimpleArtist get asSimpleArtist => SimpleArtist(id: id, name: name);
 }

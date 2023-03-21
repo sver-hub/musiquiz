@@ -5,3 +5,5 @@ export 'src/server/musixmatch_matcher_lyrics_get_response.dart';
 export 'src/server/spotify_albums_tracks_response.dart';
 export 'src/server/spotify_artists_albums_response.dart';
 export 'src/server/spotify_artist_response.dart';
+export 'src/server/spotify_track_response.dart';
+export 'src/server/spotify_search_response.dart';

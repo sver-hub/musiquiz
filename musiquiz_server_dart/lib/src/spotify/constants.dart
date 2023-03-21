@@ -5,12 +5,15 @@ abstract class SpotifyApiConstants {
   static const artistsAlbumsPath = '/artists/{id}/albums';
   static const artistPath = '/artists/{id}';
   static const savedTracksContainPath = '/me/tracks/contains';
+  static const searchPath = '/search';
 
   static const queryLimit = 'limit';
   static const queryOffset = 'offset';
   static const queryIncludeGroups = 'include_groups';
   static const queryMarket = 'market';
   static const queryIds = 'ids';
+  static const querySearchTerm = 'q';
+  static const querySearchType = 'type';
 
   static const queryValueIncludeGroups = 'album,single';
   static const queryValueMarket = 'UA';

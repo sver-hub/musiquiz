@@ -1,9 +1,9 @@
+import 'package:dart_frog/dart_frog.dart';
+
 typedef Query = Map<String, String>;
 
-abstract class QueryParser {
-  static String? parseArtistId(Query query) => query['artist_id'];
+extension RequestQueryParser on Request {
+  String? getQueryString(String key) => uri.queryParameters[key];
 
-  static bool parseOnlySaved(Query query) => query['only_saved'] == 'true';
-
-  static bool parseWithLyrics(Query query) => query['with_lyrics'] == 'true';
+  bool getQueryBool(String key) => uri.queryParameters[key] == 'true';
 }

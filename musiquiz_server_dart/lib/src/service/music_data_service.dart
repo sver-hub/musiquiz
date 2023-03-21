@@ -51,11 +51,13 @@ class MusicDataService {
     return result;
   }
 
-  Future<List<SpotifyTrack>> _getRandomSavedTracks(int numberOfTracks) async {
+  Future<List<SpotifyTrackResponse>> _getRandomSavedTracks(
+    int numberOfTracks,
+  ) async {
     final randomOffsets = await _generateRandomOffsets(numberOfTracks);
 
     final offsetLimitMap = _createOffsetLimitMap(randomOffsets);
-    final result = <SpotifyTrack>[];
+    final result = <SpotifyTrackResponse>[];
     for (final entry in offsetLimitMap.entries) {
       result.addAll(
         await _spotifyApi.getSavedTracks(offset: entry.key, limit: entry.value),
@@ -124,14 +126,14 @@ class MusicDataService {
     return tracks;
   }
 
-  Future<Artist> getArtistsDiscography({
+  Future<ArtistComplete> getArtistsDiscography({
     required String artistId,
     bool onlySaved = false,
   }) async {
     final albumsResponse = await _spotifyApi.getAllAlbumsOfArtist(artistId);
     final albums = albumsResponse.items;
 
-    final albumsWithTracks = <Album>[];
+    final albumsWithTracks = <AlbumComplete>[];
     for (final album in albums) {
       final tracks = await getTracksOfAlbum(
         album: album.asSimpleAlbum,
@@ -139,7 +141,7 @@ class MusicDataService {
       );
       if (tracks.isNotEmpty) {
         albumsWithTracks.add(
-          Album(
+          AlbumComplete(
             id: album.id,
             name: album.name,
             images: album.images,
@@ -149,11 +151,24 @@ class MusicDataService {
       }
     }
     final artistResponse = await _spotifyApi.getArtist(artistId);
-    return Artist(
+    return ArtistComplete(
       id: artistId,
       name: artistResponse.name,
       albums: albumsWithTracks.whereNotNull().toList(),
       images: artistResponse.images,
     );
+  }
+
+  Future<SearchResponse> search({
+    required String searchTerm,
+    required String searchType,
+  }) async {
+    final response = await _spotifyApi.search(
+      searchTerm: searchTerm,
+      type: searchType,
+    );
+    final tracks = response.tracks?.items.map((e) => e.asTrack).toList();
+    final artists = response.artists?.items.map((e) => e.asArtist).toList();
+    return SearchResponse(tracks: tracks ?? [], artists: artists ?? []);
   }
 }
