@@ -80,7 +80,14 @@ class _QuizItem extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = useTextEditingController();
+    final focusNode = useFocusNode();
     final pageController = ref.watch(_pageStateProvider.notifier);
+
+    void onSubmit() {
+      pageController.onSubmitAnswer(controller.text);
+      controller.text = '';
+      focusNode.requestFocus();
+    }
 
     return Center(
       child: Column(
@@ -105,14 +112,15 @@ class _QuizItem extends HookConsumerWidget {
                 width: 200,
                 child: TextField(
                   controller: controller,
+                  focusNode: focusNode,
+                  onSubmitted: (_) => onSubmit(),
+                  autocorrect: false,
+                  enableSuggestions: false,
                 ),
               ),
               const SizedBox(width: 20),
               ElevatedButton(
-                onPressed: () {
-                  pageController.onSubmitAnswer(controller.text);
-                  controller.text = '';
-                },
+                onPressed: onSubmit,
                 child: const Text('Guess'),
               ),
               const SizedBox(width: 20),

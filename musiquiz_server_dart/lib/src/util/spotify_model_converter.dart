@@ -6,7 +6,7 @@ extension SpotifyTrackX on SpotifyTrackResponse {
         id: id,
         name: name,
         artists: artists.map((e) => e.asSimpleArtist).toList(),
-        album: album.asSimpleAlbum,
+        album: album.asAlbum,
       );
 }
 
@@ -15,11 +15,11 @@ extension SpotifyTrackArtistX on SpotifyTrackArtist {
 }
 
 extension SpotifyTrackAlbumX on SpotifyTrackAlbum {
-  SimpleAlbum get asSimpleAlbum => SimpleAlbum(id: id, name: name);
+  Album get asAlbum => Album(id: id, name: name, images: images);
 }
 
 extension SpotifyAlbumsTrackX on SpotifyAlbumsTrack {
-  Track asTrack(SimpleAlbum album) => Track(
+  Track asTrack(Album album) => Track(
         id: id,
         name: name,
         artists: artists.map((e) => e.asSimpleArtist).toList(),
@@ -32,7 +32,7 @@ extension SpotifyAlbumsArtistX on SpotifyAlbumsArtist {
 }
 
 extension SpotifyArtistsAlbumX on SpotifyArtistsAlbum {
-  SimpleAlbum get asSimpleAlbum => SimpleAlbum(id: id, name: name);
+  Album get asAlbum => Album(id: id, name: name, images: images);
 }
 
 extension SpotifyArtistX on SpotifyArtistResponse {

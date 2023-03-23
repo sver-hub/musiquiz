@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:musiquiz/src/pages/quizes/guess_by_lyrics/page.dart';
 import 'package:musiquiz/src/pages/saved_tracks/page.dart';
+import 'package:musiquiz/src/pages/search/page.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
 
 import 'src/pages/main/page.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => const MainPage(),
           'saved_tracks': (context) => const SavedTracksPage(),
           'lyrics_quiz': (context) => const GuessByLyricsQuizPage(),
+          'search': (context) => const SearchPage(),
         },
       ),
     );

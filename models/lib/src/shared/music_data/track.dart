@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:models/src/shared/music_data/simple_album.dart';
+import 'album.dart';
 import 'simple_artist.dart';
 
 part 'track.g.dart';
@@ -10,7 +11,7 @@ class Track {
   final String name;
   final String? lyrics;
   final List<SimpleArtist> artists;
-  final SimpleAlbum album;
+  final Album album;
 
   Track({
     required this.id,

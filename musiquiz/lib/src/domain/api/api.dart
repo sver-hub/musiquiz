@@ -21,8 +21,7 @@ class Api {
       ),
     );
 
-    final tracks = SavedTracksResponse.fromJson(response.requireData).items;
-    return tracks;
+    return SavedTracksResponse.fromJson(response.requireData).items;
   }
 
   Future<GuessByLyricsQuizResponse> getGuessByLyricsQuiz() async {
@@ -34,5 +33,23 @@ class Api {
     );
 
     return GuessByLyricsQuizResponse.fromJson(response.requireData);
+  }
+
+  Future<SearchResponse> search({
+    required String searchTerm,
+    required String? searchType,
+  }) async {
+    final accessToken = _spotifyAccessTokenHolder.requireAccessToken;
+
+    final response = await _dio.getJson(
+      Path.search,
+      options: Options(headers: ApiUtil.createAuthHeader(accessToken)),
+      queryParameters: {
+        Query.searchTerm: searchTerm,
+        if (searchType != null) Query.searchType: searchType,
+      },
+    );
+
+    return SearchResponse.fromJson(response.requireData);
   }
 }

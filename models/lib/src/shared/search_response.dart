@@ -13,8 +13,8 @@ class SearchResponse {
   final List<Artist> artists;
 
   SearchResponse({
-    this.tracks = const [],
-    this.artists = const [],
+    required this.tracks,
+    required this.artists,
   });
 
   factory SearchResponse.fromJson(Map<String, dynamic> json) =>

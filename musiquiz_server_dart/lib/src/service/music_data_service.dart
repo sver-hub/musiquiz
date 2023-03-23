@@ -111,7 +111,7 @@ class MusicDataService {
   }
 
   Future<Iterable<Track>> getTracksOfAlbum({
-    required SimpleAlbum album,
+    required Album album,
     bool onlySaved = false,
   }) async {
     final tracksResponse = await _spotifyApi.getAllTracksOfAlbum(album.id);
@@ -136,7 +136,7 @@ class MusicDataService {
     final albumsWithTracks = <AlbumComplete>[];
     for (final album in albums) {
       final tracks = await getTracksOfAlbum(
-        album: album.asSimpleAlbum,
+        album: album.asAlbum,
         onlySaved: onlySaved,
       );
       if (tracks.isNotEmpty) {

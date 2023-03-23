@@ -12,7 +12,7 @@ Track _$TrackFromJson(Map<String, dynamic> json) => Track(
       artists: (json['artists'] as List<dynamic>)
           .map((e) => SimpleArtist.fromJson(e as Map<String, dynamic>))
           .toList(),
-      album: SimpleAlbum.fromJson(json['album'] as Map<String, dynamic>),
+      album: Album.fromJson(json['album'] as Map<String, dynamic>),
       lyrics: json['lyrics'] as String?,
     );
 
