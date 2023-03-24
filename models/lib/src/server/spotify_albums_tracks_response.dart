@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'spotify_albums_tracks_response.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class SpotifyAlbumsTracksResponse {
   final int total;
   final List<SpotifyAlbumsTrack> items;
@@ -11,11 +11,9 @@ class SpotifyAlbumsTracksResponse {
 
   factory SpotifyAlbumsTracksResponse.fromJson(Map<String, dynamic> json) =>
       _$SpotifyAlbumsTracksResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SpotifyAlbumsTracksResponseToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class SpotifyAlbumsTrack {
   final String id;
   final String name;
@@ -26,11 +24,9 @@ class SpotifyAlbumsTrack {
 
   factory SpotifyAlbumsTrack.fromJson(Map<String, dynamic> json) =>
       _$SpotifyAlbumsTrackFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SpotifyAlbumsTrackToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class SpotifyAlbumsArtist {
   final String id;
   final String name;
@@ -39,6 +35,4 @@ class SpotifyAlbumsArtist {
 
   factory SpotifyAlbumsArtist.fromJson(Map<String, dynamic> json) =>
       _$SpotifyAlbumsArtistFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SpotifyAlbumsArtistToJson(this);
 }

@@ -14,12 +14,3 @@ SpotifySavedTracksResponse _$SpotifySavedTracksResponseFromJson(
       json['next'] as String?,
       _tracksFromJson(json['items'] as List),
     );
-
-Map<String, dynamic> _$SpotifySavedTracksResponseToJson(
-        SpotifySavedTracksResponse instance) =>
-    <String, dynamic>{
-      'total': instance.total,
-      'offset': instance.offset,
-      'next': instance.next,
-      'items': _tracksToJson(instance.tracks),
-    };

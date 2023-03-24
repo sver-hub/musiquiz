@@ -14,7 +14,7 @@ extension SpotifyTrackArtistX on SpotifyTrackArtist {
   SimpleArtist get asSimpleArtist => SimpleArtist(id: id, name: name);
 }
 
-extension SpotifyTrackAlbumX on SpotifyTrackAlbum {
+extension SpotifyTrackAlbumX on SpotifyAlbum {
   Album get asAlbum => Album(id: id, name: name, images: images);
 }
 
@@ -29,10 +29,6 @@ extension SpotifyAlbumsTrackX on SpotifyAlbumsTrack {
 
 extension SpotifyAlbumsArtistX on SpotifyAlbumsArtist {
   SimpleArtist get asSimpleArtist => SimpleArtist(id: id, name: name);
-}
-
-extension SpotifyArtistsAlbumX on SpotifyArtistsAlbum {
-  Album get asAlbum => Album(id: id, name: name, images: images);
 }
 
 extension SpotifyArtistX on SpotifyArtistResponse {

@@ -4,7 +4,7 @@ import '../common/image.dart';
 
 part 'spotify_artist_response.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class SpotifyArtistResponse {
   final String id;
   final String name;
@@ -14,6 +14,4 @@ class SpotifyArtistResponse {
 
   factory SpotifyArtistResponse.fromJson(Map<String, dynamic> json) =>
       _$SpotifyArtistResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SpotifyArtistResponseToJson(this);
 }

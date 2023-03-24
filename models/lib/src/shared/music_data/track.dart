@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:models/src/shared/music_data/simple_album.dart';
 import 'album.dart';
 import 'simple_artist.dart';
 

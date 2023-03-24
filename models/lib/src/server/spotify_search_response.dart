@@ -4,7 +4,7 @@ import 'package:models/src/server/spotify_track_response.dart';
 
 part 'spotify_search_response.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class SpotifySearchResponse {
   final SpotifySearchTracksResponse? tracks;
   final SpotifySearchArtistsResponse? artists;
@@ -13,11 +13,9 @@ class SpotifySearchResponse {
 
   factory SpotifySearchResponse.fromJson(Map<String, dynamic> json) =>
       _$SpotifySearchResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SpotifySearchResponseToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class SpotifySearchTracksResponse {
   final int total;
   final List<SpotifyTrackResponse> items;
@@ -26,11 +24,9 @@ class SpotifySearchTracksResponse {
 
   factory SpotifySearchTracksResponse.fromJson(Map<String, dynamic> json) =>
       _$SpotifySearchTracksResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SpotifySearchTracksResponseToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class SpotifySearchArtistsResponse {
   final int total;
   final List<SpotifyArtistResponse> items;
@@ -39,6 +35,4 @@ class SpotifySearchArtistsResponse {
 
   factory SpotifySearchArtistsResponse.fromJson(Map<String, dynamic> json) =>
       _$SpotifySearchArtistsResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SpotifySearchArtistsResponseToJson(this);
 }

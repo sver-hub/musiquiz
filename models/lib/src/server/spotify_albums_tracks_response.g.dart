@@ -15,13 +15,6 @@ SpotifyAlbumsTracksResponse _$SpotifyAlbumsTracksResponseFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$SpotifyAlbumsTracksResponseToJson(
-        SpotifyAlbumsTracksResponse instance) =>
-    <String, dynamic>{
-      'total': instance.total,
-      'items': instance.items.map((e) => e.toJson()).toList(),
-    };
-
 SpotifyAlbumsTrack _$SpotifyAlbumsTrackFromJson(Map<String, dynamic> json) =>
     SpotifyAlbumsTrack(
       json['id'] as String,
@@ -32,23 +25,8 @@ SpotifyAlbumsTrack _$SpotifyAlbumsTrackFromJson(Map<String, dynamic> json) =>
       json['track_number'] as int,
     );
 
-Map<String, dynamic> _$SpotifyAlbumsTrackToJson(SpotifyAlbumsTrack instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'artists': instance.artists.map((e) => e.toJson()).toList(),
-      'track_number': instance.trackNumber,
-    };
-
 SpotifyAlbumsArtist _$SpotifyAlbumsArtistFromJson(Map<String, dynamic> json) =>
     SpotifyAlbumsArtist(
       json['id'] as String,
       json['name'] as String,
     );
-
-Map<String, dynamic> _$SpotifyAlbumsArtistToJson(
-        SpotifyAlbumsArtist instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-    };

@@ -19,13 +19,6 @@ SpotifySearchResponse _$SpotifySearchResponseFromJson(
               json['artists'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$SpotifySearchResponseToJson(
-        SpotifySearchResponse instance) =>
-    <String, dynamic>{
-      'tracks': instance.tracks?.toJson(),
-      'artists': instance.artists?.toJson(),
-    };
-
 SpotifySearchTracksResponse _$SpotifySearchTracksResponseFromJson(
         Map<String, dynamic> json) =>
     SpotifySearchTracksResponse(
@@ -35,13 +28,6 @@ SpotifySearchTracksResponse _$SpotifySearchTracksResponseFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$SpotifySearchTracksResponseToJson(
-        SpotifySearchTracksResponse instance) =>
-    <String, dynamic>{
-      'total': instance.total,
-      'items': instance.items.map((e) => e.toJson()).toList(),
-    };
-
 SpotifySearchArtistsResponse _$SpotifySearchArtistsResponseFromJson(
         Map<String, dynamic> json) =>
     SpotifySearchArtistsResponse(
@@ -50,10 +36,3 @@ SpotifySearchArtistsResponse _$SpotifySearchArtistsResponseFromJson(
           .map((e) => SpotifyArtistResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
-
-Map<String, dynamic> _$SpotifySearchArtistsResponseToJson(
-        SpotifySearchArtistsResponse instance) =>
-    <String, dynamic>{
-      'total': instance.total,
-      'items': instance.items.map((e) => e.toJson()).toList(),
-    };
