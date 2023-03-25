@@ -56,7 +56,7 @@ class SpotifyApi {
     return _totalSavedTracks = data.total;
   }
 
-  Future<List<SpotifyTrackResponse>> getSavedTracks({
+  Future<List<SpotifyTrack>> getSavedTracks({
     required int limit,
     required int offset,
   }) async {

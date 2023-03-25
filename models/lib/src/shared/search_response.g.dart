@@ -16,10 +16,15 @@ SearchResponse _$SearchResponseFromJson(Map<String, dynamic> json) =>
               ?.map((e) => Artist.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      albums: (json['albums'] as List<dynamic>?)
+              ?.map((e) => Album.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$SearchResponseToJson(SearchResponse instance) =>
     <String, dynamic>{
       'tracks': instance.tracks.map((e) => e.toJson()).toList(),
       'artists': instance.artists.map((e) => e.toJson()).toList(),
+      'albums': instance.albums.map((e) => e.toJson()).toList(),
     };

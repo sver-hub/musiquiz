@@ -7,7 +7,7 @@ import 'package:musiquiz_server_dart/src/service/music_data_service.dart';
 Future<Response> onRequest(RequestContext context) async {
   const searchTermQueryKey = 'q';
   const searchTypeQueryKey = 'type';
-  const acceptableSearchTypes = ['track', 'artist'];
+  const acceptableSearchTypes = ['track', 'artist', 'album'];
 
   final request = context.request;
   final accessToken = HeaderParser.parseAuthorizationBearer(request.headers);

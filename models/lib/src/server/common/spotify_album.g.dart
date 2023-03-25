@@ -12,4 +12,7 @@ SpotifyAlbum _$SpotifyAlbumFromJson(Map<String, dynamic> json) => SpotifyAlbum(
           .map((e) => Image.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['name'] as String,
+      (json['artists'] as List<dynamic>)
+          .map((e) => SpotifyArtistSimple.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );

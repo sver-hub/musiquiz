@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:models/src/common/image.dart';
 
+import '../../common/image.dart';
 import 'album_complete.dart';
 
 part 'artist_complete.g.dart';

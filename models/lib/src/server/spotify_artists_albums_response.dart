@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'common/spotify_album.dart';
 
 part 'spotify_artists_albums_response.g.dart';

@@ -1,17 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'simple_album.dart';
+part of 'artist_simple.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SimpleAlbum _$SimpleAlbumFromJson(Map<String, dynamic> json) => SimpleAlbum(
+ArtistSimple _$ArtistSimpleFromJson(Map<String, dynamic> json) => ArtistSimple(
       id: json['id'] as String,
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$SimpleAlbumToJson(SimpleAlbum instance) =>
+Map<String, dynamic> _$ArtistSimpleToJson(ArtistSimple instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

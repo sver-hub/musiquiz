@@ -16,6 +16,9 @@ AlbumComplete _$AlbumCompleteFromJson(Map<String, dynamic> json) =>
       tracks: (json['tracks'] as List<dynamic>)
           .map((e) => Track.fromJson(e as Map<String, dynamic>))
           .toList(),
+      artists: (json['artists'] as List<dynamic>)
+          .map((e) => ArtistSimple.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$AlbumCompleteToJson(AlbumComplete instance) =>
@@ -24,4 +27,5 @@ Map<String, dynamic> _$AlbumCompleteToJson(AlbumComplete instance) =>
       'name': instance.name,
       'images': instance.images.map((e) => e.toJson()).toList(),
       'tracks': instance.tracks.map((e) => e.toJson()).toList(),
+      'artists': instance.artists.map((e) => e.toJson()).toList(),
     };

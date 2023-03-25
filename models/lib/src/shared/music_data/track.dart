@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'album.dart';
-import 'simple_artist.dart';
+import 'artist_simple.dart';
 
 part 'track.g.dart';
 
@@ -9,7 +10,7 @@ class Track {
   final String id;
   final String name;
   final String? lyrics;
-  final List<SimpleArtist> artists;
+  final List<ArtistSimple> artists;
   final Album album;
 
   Track({

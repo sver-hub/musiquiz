@@ -20,13 +20,7 @@ SpotifyAlbumsTrack _$SpotifyAlbumsTrackFromJson(Map<String, dynamic> json) =>
       json['id'] as String,
       json['name'] as String,
       (json['artists'] as List<dynamic>)
-          .map((e) => SpotifyAlbumsArtist.fromJson(e as Map<String, dynamic>))
+          .map((e) => SpotifyArtistSimple.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['track_number'] as int,
-    );
-
-SpotifyAlbumsArtist _$SpotifyAlbumsArtistFromJson(Map<String, dynamic> json) =>
-    SpotifyAlbumsArtist(
-      json['id'] as String,
-      json['name'] as String,
     );

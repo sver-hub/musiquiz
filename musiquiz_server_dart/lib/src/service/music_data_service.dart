@@ -51,13 +51,13 @@ class MusicDataService {
     return result;
   }
 
-  Future<List<SpotifyTrackResponse>> _getRandomSavedTracks(
+  Future<List<SpotifyTrack>> _getRandomSavedTracks(
     int numberOfTracks,
   ) async {
     final randomOffsets = await _generateRandomOffsets(numberOfTracks);
 
     final offsetLimitMap = _createOffsetLimitMap(randomOffsets);
-    final result = <SpotifyTrackResponse>[];
+    final result = <SpotifyTrack>[];
     for (final entry in offsetLimitMap.entries) {
       result.addAll(
         await _spotifyApi.getSavedTracks(offset: entry.key, limit: entry.value),
@@ -132,6 +132,7 @@ class MusicDataService {
       id: album.id,
       name: album.name,
       images: album.images,
+      artists: album.artists,
       tracks: tracks.toList(),
     );
   }
@@ -172,6 +173,12 @@ class MusicDataService {
     );
     final tracks = response.tracks?.items.map((e) => e.asTrack).toList();
     final artists = response.artists?.items.map((e) => e.asArtist).toList();
-    return SearchResponse(tracks: tracks ?? [], artists: artists ?? []);
+    final albums = response.albums?.items.map((e) => e.asAlbum).toList();
+
+    return SearchResponse(
+      tracks: tracks ?? [],
+      artists: artists ?? [],
+      albums: albums ?? [],
+    );
   }
 }

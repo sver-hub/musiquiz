@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'spotify_track_response.dart';
+import 'common/spotify_track.dart';
 
 part 'spotify_saved_tracks_response.g.dart';
 
@@ -10,7 +10,7 @@ class SpotifySavedTracksResponse {
   final int offset;
   final String? next;
   @JsonKey(name: 'items', fromJson: _tracksFromJson)
-  final List<SpotifyTrackResponse> tracks;
+  final List<SpotifyTrack> tracks;
 
   SpotifySavedTracksResponse(this.total, this.offset, this.next, this.tracks);
 
@@ -18,5 +18,5 @@ class SpotifySavedTracksResponse {
       _$SpotifySavedTracksResponseFromJson(json);
 }
 
-List<SpotifyTrackResponse> _tracksFromJson(List<dynamic> list) =>
-    list.map((e) => SpotifyTrackResponse.fromJson(e['track'])).toList();
+List<SpotifyTrack> _tracksFromJson(List<dynamic> list) =>
+    list.map((e) => SpotifyTrack.fromJson(e['track'])).toList();

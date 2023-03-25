@@ -17,6 +17,10 @@ SpotifySearchResponse _$SpotifySearchResponseFromJson(
           ? null
           : SpotifySearchArtistsResponse.fromJson(
               json['artists'] as Map<String, dynamic>),
+      json['albums'] == null
+          ? null
+          : SpotifySearchAlbumsResponse.fromJson(
+              json['albums'] as Map<String, dynamic>),
     );
 
 SpotifySearchTracksResponse _$SpotifySearchTracksResponseFromJson(
@@ -24,7 +28,7 @@ SpotifySearchTracksResponse _$SpotifySearchTracksResponseFromJson(
     SpotifySearchTracksResponse(
       json['total'] as int,
       (json['items'] as List<dynamic>)
-          .map((e) => SpotifyTrackResponse.fromJson(e as Map<String, dynamic>))
+          .map((e) => SpotifyTrack.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -34,5 +38,14 @@ SpotifySearchArtistsResponse _$SpotifySearchArtistsResponseFromJson(
       json['total'] as int,
       (json['items'] as List<dynamic>)
           .map((e) => SpotifyArtistResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+SpotifySearchAlbumsResponse _$SpotifySearchAlbumsResponseFromJson(
+        Map<String, dynamic> json) =>
+    SpotifySearchAlbumsResponse(
+      json['total'] as int,
+      (json['items'] as List<dynamic>)
+          .map((e) => SpotifyAlbum.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
