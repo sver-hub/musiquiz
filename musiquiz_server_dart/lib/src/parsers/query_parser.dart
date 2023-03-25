@@ -6,4 +6,6 @@ extension RequestQueryParser on Request {
   String? getQueryString(String key) => uri.queryParameters[key];
 
   bool getQueryBool(String key) => uri.queryParameters[key] == 'true';
+
+  int? getQueryInt(String key) => int.tryParse(uri.queryParameters[key] ?? '');
 }

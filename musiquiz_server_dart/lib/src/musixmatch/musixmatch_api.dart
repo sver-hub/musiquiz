@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:models/server_models.dart';
-import 'package:musiquiz_server_dart/src/musixmatch/constants.dart';
+
 import '../util/dio_x.dart';
+import 'constants.dart';
 
 class MusixmatchApi {
   static const _apiKey = 'e0d285379414d45c3b115eea43120438';

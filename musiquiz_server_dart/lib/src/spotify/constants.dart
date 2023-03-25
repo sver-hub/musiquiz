@@ -1,10 +1,11 @@
 abstract class SpotifyApiConstants {
   static const baseUrl = 'https://api.spotify.com/v1';
   static const savedTracksPath = '/me/tracks';
-  static const albumsTracksPath = '/albums/{id}/tracks';
-  static const artistsAlbumsPath = '/artists/{id}/albums';
-  static const artistPath = '/artists/{id}';
   static const savedTracksContainPath = '/me/tracks/contains';
+  static const artistPath = '/artists/{id}';
+  static const albumPath = '/albums/{id}';
+  static const artistsAlbumsPath = '/artists/{id}/albums';
+  static const albumsTracksPath = '/albums/{id}/tracks';
   static const searchPath = '/search';
 
   static const queryLimit = 'limit';

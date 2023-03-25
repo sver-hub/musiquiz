@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:models/models.dart';
 import 'package:models/server_models.dart';
-import 'package:musiquiz_server_dart/src/util/spotify_model_converter.dart';
-import 'package:musiquiz_server_dart/src/util/track_x.dart';
 
 import '../musixmatch/musixmatch_api.dart';
 import '../spotify/spotify_api.dart';
+import '../util/spotify_model_converter.dart';
+import '../util/track_x.dart';
 
 class MusicDataService {
   final SpotifyApi _spotifyApi;
@@ -77,19 +77,19 @@ class MusicDataService {
       return tracks;
     }
 
-    return _getTracksWithLyricks(tracks);
+    return getLyricsForTracks(tracks);
   }
 
-  Future<Iterable<Track>> _getTracksWithLyricks(Iterable<Track> tracks) async {
+  Future<Iterable<Track>> getLyricsForTracks(Iterable<Track> tracks) async {
     final tracksWithLyrics = <Track>[];
     for (final track in tracks) {
-      tracksWithLyrics.add(await _getLyricsForTrack(track));
+      tracksWithLyrics.add(await getLyricsForTrack(track));
     }
 
     return tracksWithLyrics.where((track) => track.lyrics != null);
   }
 
-  Future<Track> _getLyricsForTrack(Track track) async {
+  Future<Track> getLyricsForTrack(Track track) async {
     final response = await _musixmatchApi.getLyrics(
       trackName: track.name,
       artistName: track.artists.first.name,
@@ -110,7 +110,12 @@ class MusicDataService {
     return filtered;
   }
 
-  Future<Iterable<Track>> getTracksOfAlbum({
+  Future<Album> getAlbum({required String albumId}) async {
+    final spotifyAlbum = await _spotifyApi.getAlbum(albumId);
+    return spotifyAlbum.asAlbum;
+  }
+
+  Future<AlbumComplete> getAlbumComplete({
     required Album album,
     bool onlySaved = false,
   }) async {
@@ -123,10 +128,15 @@ class MusicDataService {
       tracks = await _filterSavedOnly(tracks.toList());
     }
 
-    return tracks;
+    return AlbumComplete(
+      id: album.id,
+      name: album.name,
+      images: album.images,
+      tracks: tracks.toList(),
+    );
   }
 
-  Future<ArtistComplete> getArtistsDiscography({
+  Future<ArtistComplete> getArtistsComplete({
     required String artistId,
     bool onlySaved = false,
   }) async {
@@ -135,19 +145,12 @@ class MusicDataService {
 
     final albumsWithTracks = <AlbumComplete>[];
     for (final album in albums) {
-      final tracks = await getTracksOfAlbum(
+      final albumComplete = await getAlbumComplete(
         album: album.asAlbum,
         onlySaved: onlySaved,
       );
-      if (tracks.isNotEmpty) {
-        albumsWithTracks.add(
-          AlbumComplete(
-            id: album.id,
-            name: album.name,
-            images: album.images,
-            tracks: tracks.toList(),
-          ),
-        );
+      if (albumComplete.tracks.isNotEmpty) {
+        albumsWithTracks.add(albumComplete);
       }
     }
     final artistResponse = await _spotifyApi.getArtist(artistId);

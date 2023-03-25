@@ -112,6 +112,17 @@ class SpotifyApi {
     return SpotifyArtistResponse.fromJson(response.data!);
   }
 
+  Future<SpotifyAlbum> getAlbum(String albumId) async {
+    final response = await _dio.getJson(
+      SpotifyApiConstants.albumPath.replaceFirst('{id}', albumId),
+      queryParameters: {
+        SpotifyApiConstants.queryMarket: SpotifyApiConstants.queryValueMarket,
+      },
+    );
+
+    return SpotifyAlbum.fromJson(response.data!);
+  }
+
   Future<List<bool>> checkIfTrackAreSaved(List<String> trackIds) async {
     final slices = trackIds.slices(50);
     final result = <bool>[];
