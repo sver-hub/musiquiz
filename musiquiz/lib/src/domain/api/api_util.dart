@@ -1,4 +1,4 @@
-import 'package:musiquiz/src/domain/api/constants.dart';
+import 'constants.dart';
 
 class ApiUtil {
   static Map<String, String> createAuthHeader(String spotifyAccessToken) =>

@@ -1,5 +1,6 @@
-import 'spotify_access_token_holder.dart';
 import 'package:spotify_sdk/spotify_sdk.dart';
+
+import 'spotify_access_token_holder.dart';
 
 class SpotifyAuth {
   final SpotifyAccessTokenHolder _accessTokenHolder;

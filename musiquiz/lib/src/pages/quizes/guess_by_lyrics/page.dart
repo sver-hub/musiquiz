@@ -1,16 +1,18 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:musiquiz/src/di/service.dart';
 
-import 'page_state.dart';
+import '../../../di/service.dart';
 import 'page_controller.dart';
+import 'page_state.dart';
 
 final _pageStateProvider =
     StateNotifierProvider<GuessByLyricsPageController, GuessByLyricsPageState>(
   (ref) => GuessByLyricsPageController(ref.watch(apiProvider)),
 );
 
+@RoutePage()
 class GuessByLyricsQuizPage extends HookConsumerWidget {
   const GuessByLyricsQuizPage({super.key});
 
@@ -43,7 +45,7 @@ class GuessByLyricsQuizPage extends HookConsumerWidget {
             child: CircularProgressIndicator(),
           ),
         ),
-        done: (score) => _Result(score),
+        done: _Result.new,
       ),
     );
   }
@@ -104,6 +106,7 @@ class _QuizItem extends HookConsumerWidget {
           Text('track: ${item.track.mask}'),
           Text('album: ${item.album.mask}'),
           Text(
+              // ignore: lines_longer_than_80_chars
               'artist${item.artists.length > 1 ? 's' : ''}: ${item.artists.map((e) => e.mask).join(', ')}'),
           Row(
             mainAxisSize: MainAxisSize.min,

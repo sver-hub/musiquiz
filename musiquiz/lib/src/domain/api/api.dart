@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:models/models.dart';
-import 'package:musiquiz/src/domain/api/api_util.dart';
-import 'package:musiquiz/src/domain/api/constants.dart';
-import 'package:musiquiz/src/domain/auth/spotify/spotify_access_token_holder.dart';
-import 'package:musiquiz/src/util/dio_x.dart';
+
+import '../../util/dio_x.dart';
+import '../auth/spotify/spotify_access_token_holder.dart';
+import 'api_util.dart';
+import 'constants.dart';
 
 class Api {
   final SpotifyAccessTokenHolder _spotifyAccessTokenHolder;

@@ -34,14 +34,13 @@ class GuessByLyricsPageState with _$GuessByLyricsPageState {
 
 @freezed
 class GuessByLyricsQuizItemState with _$GuessByLyricsQuizItemState {
-  const GuessByLyricsQuizItemState._();
-
   factory GuessByLyricsQuizItemState({
     required String lyrics,
     required MaskedText track,
     required MaskedText album,
     required List<MaskedText> artists,
   }) = _GuessByLyricsQuizItemState;
+  const GuessByLyricsQuizItemState._();
 
   factory GuessByLyricsQuizItemState.create(GuessByLyricsQuizItem item) =>
       GuessByLyricsQuizItemState(
@@ -54,12 +53,11 @@ class GuessByLyricsQuizItemState with _$GuessByLyricsQuizItemState {
 
 @freezed
 class MaskedText with _$MaskedText {
-  const MaskedText._();
-
   factory MaskedText({
     required String name,
     required String mask,
   }) = _MaskedText;
+  const MaskedText._();
 
   factory MaskedText.create(String value) =>
       MaskedText(name: value, mask: value.replaceAll(RegExp(r'\w'), '*'));

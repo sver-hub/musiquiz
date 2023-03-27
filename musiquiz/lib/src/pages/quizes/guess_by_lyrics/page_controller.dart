@@ -1,5 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:musiquiz/src/domain/api/api.dart';
+
+import '../../../domain/api/api.dart';
 
 import 'page_state.dart';
 
